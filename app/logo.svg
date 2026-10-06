@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- Gradientes profesionales -->
+    <linearGradient id="mainGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0066CC;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0052A3;stop-opacity:1" />
+    </linearGradient>
+    
+    <linearGradient id="accentGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#17A2B8;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0066CC;stop-opacity:1" />
+    </linearGradient>
+    
+    <filter id="shadow" x="-50%" y="-50%" width="200%" height="200%">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-opacity="0.2"/>
+    </filter>
+  </defs>
+
+  <!-- Fondo circular -->
+  <circle cx="100" cy="100" r="95" fill="url(#mainGradient)" filter="url(#shadow)"/>
+  
+  <!-- Círculo interior más claro para contraste -->
+  <circle cx="100" cy="100" r="85" fill="#FFFFFF" opacity="0.95"/>
+
+  <!-- Elemento decorativo superior (gota de piel/medicina) -->
+  <g transform="translate(100, 50)">
+    <!-- Gota grande principal -->
+    <path d="M 0 -25 C -12 -15 -18 0 -18 10 C -18 22 -10 32 0 32 C 10 32 18 22 18 10 C 18 0 12 -15 0 -25 Z" 
+          fill="url(#accentGradient)" filter="url(#shadow)"/>
+    
+    <!-- Brillo en la gota -->
+    <ellipse cx="-6" cy="-8" rx="6" ry="8" fill="#FFFFFF" opacity="0.6"/>
+  </g>
+
+  <!-- Microscopio/Instrumento dermatológico (símbolo de profesionalismo) -->
+  <g transform="translate(100, 95)">
+    <!-- Mango superior -->
+    <rect x="-3" y="-35" width="6" height="15" rx="3" fill="url(#mainGradient)"/>
+    
+    <!-- Lentes/objetivo -->
+    <circle cx="0" cy="-18" r="8" fill="none" stroke="url(#mainGradient)" stroke-width="2"/>
+    <circle cx="0" cy="-18" r="5" fill="#E8F4F8" opacity="0.7"/>
+    
+    <!-- Espejo/reflejo en lente -->
+    <path d="M -3 -20 Q 0 -16 3 -20" fill="none" stroke="#0066CC" stroke-width="1.5" opacity="0.6"/>
+    
+    <!-- Tubo central -->
+    <rect x="-2.5" y="-18" width="5" height="20" fill="url(#mainGradient)" opacity="0.8" rx="2"/>
+    
+    <!-- Base/platina -->
+    <ellipse cx="0" cy="5" rx="12" ry="6" fill="url(#accentGradient)"/>
+    <ellipse cx="0" cy="4" rx="11" ry="5" fill="#0066CC" opacity="0.7"/>
+    
+    <!-- Patas de soporte -->
+    <line x1="-8" y1="5" x2="-10" y2="12" stroke="url(#mainGradient)" stroke-width="2" stroke-linecap="round"/>
+    <line x1="8" y1="5" x2="10" y2="12" stroke="url(#mainGradient)" stroke-width="2" stroke-linecap="round"/>
+  </g>
+
+  <!-- Elementos decorativos circulares (moléculas/células) -->
+  <g opacity="0.6">
+    <!-- Molécula superior derecha -->
+    <circle cx="130" cy="65" r="3" fill="#17A2B8"/>
+    <circle cx="140" cy="60" r="2.5" fill="#0066CC"/>
+    <circle cx="135" cy="50" r="2" fill="#17A2B8"/>
+    <line x1="130" y1="65" x2="140" y2="60" stroke="#0066CC" stroke-width="1"/>
+    <line x1="130" y1="65" x2="135" y2="50" stroke="#0066CC" stroke-width="1"/>
+    
+    <!-- Molécula inferior izquierda -->
+    <circle cx="65" cy="135" r="3" fill="#17A2B8"/>
+    <circle cx="55" cy="140" r="2.5" fill="#0066CC"/>
+    <circle cx="70" cy="148" r="2" fill="#17A2B8"/>
+    <line x1="65" y1="135" x2="55" y2="140" stroke="#0066CC" stroke-width="1"/>
+    <line x1="65" y1="135" x2="70" y2="148" stroke="#0066CC" stroke-width="1"/>
+  </g>
+
+  <!-- Línea decorativa inferior (onda/movimiento) -->
+  <path d="M 60 150 Q 80 145 100 150 Q 120 155 140 150" 
+        fill="none" stroke="url(#accentGradient)" stroke-width="2" opacity="0.4" stroke-linecap="round"/>
+
+  <!-- Borde exterior decorativo -->
+  <circle cx="100" cy="100" r="95" fill="none" stroke="url(#mainGradient)" stroke-width="2" opacity="0.3"/>
+  <circle cx="100" cy="100" r="92" fill="none" stroke="url(#accentGradient)" stroke-width="1" opacity="0.2"/>
+</svg>
