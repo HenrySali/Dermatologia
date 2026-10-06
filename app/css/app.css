@@ -1,0 +1,607 @@
+/* ===========================
+   ESTILOS DE LA APLICACIÓN
+   =========================== */
+
+/* Paleta de colores para admin */
+:root {
+    --admin-color: #8b5cf6;
+    --admin-dark: #6d28d9;
+    --admin-light: #ede9fe;
+    --success-color: #10b981;
+    --warning-color: #f59e0b;
+    --error-color: #ef4444;
+}
+
+/* ===========================
+   SECCIONES
+   =========================== */
+
+.seccion {
+    min-height: calc(100vh - 70px);
+    padding: 80px 20px;
+    animation: fadeIn 0.5s ease;
+}
+
+.seccion-activa {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ===========================
+   SOLICITAR TURNO
+   =========================== */
+
+.solicitar-turno-section {
+    background: var(--light-bg);
+}
+
+.solicitar-turno-form {
+    max-width: 600px;
+    margin: 2rem auto;
+    background: white;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: var(--shadow);
+}
+
+.solicitar-turno-form .form-group {
+    margin-bottom: 1.5rem;
+}
+
+.solicitar-turno-form label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+    color: var(--primary-color);
+}
+
+.solicitar-turno-form input,
+.solicitar-turno-form select,
+.solicitar-turno-form textarea {
+    width: 100%;
+    padding: 0.8rem;
+    border: 2px solid var(--border-color);
+    border-radius: 5px;
+    font-family: inherit;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+}
+
+.solicitar-turno-form input:focus,
+.solicitar-turno-form select:focus,
+.solicitar-turno-form textarea:focus {
+    outline: none;
+    border-color: var(--primary-color);
+}
+
+.solicitar-turno-form .submit-button {
+    background: var(--secondary-color);
+    color: white;
+    padding: 12px 30px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    width: 100%;
+    margin-bottom: 10px;
+    transition: all 0.3s ease;
+}
+
+.solicitar-turno-form .submit-button:hover {
+    transform: scale(1.02);
+    box-shadow: var(--shadow-hover);
+}
+
+.btn-volver {
+    background: var(--text-light);
+    color: white;
+    padding: 12px 30px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    width: 100%;
+    transition: all 0.3s ease;
+}
+
+.btn-volver:hover {
+    background: var(--text-dark);
+}
+
+/* ===========================
+   PANEL DE ADMINISTRACIÓN
+   =========================== */
+
+.admin-panel {
+    background: var(--admin-light);
+    padding: 40px 20px;
+}
+
+.login-container {
+    max-width: 400px;
+    margin: 60px auto;
+    background: white;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: var(--shadow);
+    text-align: center;
+}
+
+.login-container h2 {
+    color: var(--admin-color);
+    margin-bottom: 1.5rem;
+}
+
+.login-container form {
+    text-align: left;
+}
+
+.login-container .form-group {
+    margin-bottom: 1.5rem;
+}
+
+.login-container label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+    color: var(--admin-color);
+}
+
+.login-container input {
+    width: 100%;
+    padding: 0.8rem;
+    border: 2px solid var(--admin-light);
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+.login-container input:focus {
+    outline: none;
+    border-color: var(--admin-color);
+}
+
+.login-container .submit-button {
+    width: 100%;
+    background: var(--admin-color);
+    color: white;
+    padding: 12px;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-bottom: 10px;
+    transition: all 0.3s ease;
+}
+
+.login-container .submit-button:hover {
+    background: var(--admin-dark);
+}
+
+.info-texto {
+    color: var(--text-light);
+    font-size: 0.9rem;
+    margin-top: 1.5rem;
+}
+
+/* Admin View */
+#admin-view {
+    background: white;
+    border-radius: 10px;
+    padding: 2rem;
+    box-shadow: var(--shadow);
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.admin-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid var(--admin-light);
+}
+
+.admin-header h2 {
+    color: var(--admin-color);
+    margin: 0;
+}
+
+.admin-info {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+.admin-info span {
+    color: var(--text-dark);
+    font-weight: bold;
+}
+
+/* Admin Tabs */
+.admin-tabs {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    border-bottom: 2px solid var(--border-color);
+    flex-wrap: wrap;
+}
+
+.tab-button {
+    background: none;
+    border: none;
+    padding: 1rem;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: bold;
+    color: var(--text-light);
+    border-bottom: 3px solid transparent;
+    transition: all 0.3s ease;
+}
+
+.tab-button:hover {
+    color: var(--admin-color);
+}
+
+.tab-button.activo {
+    color: var(--admin-color);
+    border-bottom-color: var(--admin-color);
+}
+
+/* Tab Content */
+.tab-content {
+    display: none;
+}
+
+.tab-content.activo {
+    display: block;
+    animation: fadeIn 0.3s ease;
+}
+
+.tab-content h3 {
+    color: var(--admin-color);
+    margin-bottom: 1.5rem;
+}
+
+/* Dashboard Stats */
+.dashboard-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.stat-card {
+    background: linear-gradient(135deg, var(--admin-color) 0%, var(--admin-dark) 100%);
+    color: white;
+    padding: 2rem;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: var(--shadow);
+}
+
+.stat-card h4 {
+    margin: 0 0 1rem 0;
+    font-size: 0.9rem;
+    opacity: 0.9;
+}
+
+.stat-number {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin: 0;
+}
+
+.stat-text {
+    font-size: 1.2rem;
+    margin: 0;
+}
+
+/* Botones */
+.btn-agregar {
+    background: var(--success-color);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    margin-bottom: 1.5rem;
+    transition: all 0.3s ease;
+}
+
+.btn-agregar:hover {
+    background: #059669;
+    transform: scale(1.05);
+}
+
+.btn-admin {
+    background: var(--admin-color) !important;
+}
+
+.btn-logout {
+    background: var(--error-color) !important;
+}
+
+.btn-cancelar {
+    background: var(--text-light);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-left: 10px;
+    transition: all 0.3s ease;
+}
+
+.btn-cancelar:hover {
+    background: var(--text-dark);
+}
+
+/* Tablas */
+.tabla-container {
+    overflow-x: auto;
+    margin-bottom: 2rem;
+}
+
+.tabla {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+}
+
+.tabla thead {
+    background: var(--admin-light);
+}
+
+.tabla th {
+    padding: 1rem;
+    text-align: left;
+    font-weight: bold;
+    color: var(--admin-color);
+    border-bottom: 2px solid var(--border-color);
+}
+
+.tabla td {
+    padding: 1rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.tabla tbody tr:hover {
+    background: rgba(139, 92, 246, 0.05);
+}
+
+.tabla .sin-datos {
+    text-align: center;
+    color: var(--text-light);
+    font-style: italic;
+}
+
+/* Botones de tabla */
+.btn-editar,
+.btn-eliminar,
+.btn-ver {
+    padding: 0.4rem 0.8rem;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    margin-right: 0.5rem;
+    transition: all 0.2s ease;
+}
+
+.btn-editar {
+    background: var(--admin-color);
+    color: white;
+}
+
+.btn-editar:hover {
+    background: var(--admin-dark);
+}
+
+.btn-eliminar {
+    background: var(--error-color);
+    color: white;
+}
+
+.btn-eliminar:hover {
+    background: #dc2626;
+}
+
+.btn-ver {
+    background: var(--primary-color);
+    color: white;
+}
+
+.btn-ver:hover {
+    background: var(--primary-dark);
+}
+
+/* Formularios Admin */
+#form-turno-container,
+#form-paciente-container {
+    background: var(--admin-light);
+    padding: 1.5rem;
+    border-radius: 10px;
+    margin-bottom: 2rem;
+}
+
+#form-turno-container h4,
+#form-paciente-container h4 {
+    color: var(--admin-color);
+    margin-top: 0;
+}
+
+#form-turno,
+#form-paciente,
+#form-cambiar-password {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1rem;
+}
+
+#form-turno .form-group,
+#form-paciente .form-group,
+#form-cambiar-password .form-group {
+    grid-column: 1;
+}
+
+#form-turno textarea,
+#form-paciente textarea {
+    grid-column: 1 / -1;
+}
+
+#form-turno label,
+#form-paciente label,
+#form-cambiar-password label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+    color: var(--admin-color);
+}
+
+#form-turno input,
+#form-turno select,
+#form-turno textarea,
+#form-paciente input,
+#form-paciente select,
+#form-paciente textarea,
+#form-cambiar-password input {
+    width: 100%;
+    padding: 0.8rem;
+    border: 2px solid var(--border-color);
+    border-radius: 5px;
+    font-family: inherit;
+    font-size: 1rem;
+}
+
+#form-turno input:focus,
+#form-turno select:focus,
+#form-turno textarea:focus,
+#form-paciente input:focus,
+#form-paciente select:focus,
+#form-paciente textarea:focus,
+#form-cambiar-password input:focus {
+    outline: none;
+    border-color: var(--admin-color);
+}
+
+#form-turno .submit-button,
+#form-paciente .submit-button,
+#form-cambiar-password .submit-button {
+    grid-column: 1 / -1;
+    background: var(--admin-color);
+    color: white;
+    padding: 12px;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-right: 10px;
+    transition: all 0.3s ease;
+}
+
+#form-turno .submit-button:hover,
+#form-paciente .submit-button:hover,
+#form-cambiar-password .submit-button:hover {
+    background: var(--admin-dark);
+    transform: scale(1.02);
+}
+
+/* Configuración */
+.config-section {
+    background: var(--admin-light);
+    padding: 1.5rem;
+    border-radius: 10px;
+    margin-bottom: 2rem;
+}
+
+.config-section h4 {
+    color: var(--admin-color);
+    margin-top: 0;
+}
+
+/* ===========================
+   RESPONSIVE
+   =========================== */
+
+@media (max-width: 768px) {
+    .admin-tabs {
+        flex-direction: column;
+    }
+
+    .tab-button {
+        padding: 0.8rem 0.5rem;
+    }
+
+    .dashboard-stats {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .tabla {
+        font-size: 0.85rem;
+    }
+
+    .tabla th,
+    .tabla td {
+        padding: 0.5rem;
+    }
+
+    #form-turno,
+    #form-paciente,
+    #form-cambiar-password {
+        grid-template-columns: 1fr;
+    }
+
+    #form-turno textarea,
+    #form-paciente textarea {
+        grid-column: 1;
+    }
+
+    .admin-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
+
+@media (max-width: 480px) {
+    .dashboard-stats {
+        grid-template-columns: 1fr;
+    }
+
+    .stat-card {
+        padding: 1.5rem;
+    }
+
+    .stat-number {
+        font-size: 2rem;
+    }
+
+    .tabla {
+        font-size: 0.75rem;
+    }
+
+    .tabla th,
+    .tabla td {
+        padding: 0.4rem;
+    }
+
+    .btn-editar,
+    .btn-eliminar,
+    .btn-ver {
+        padding: 0.3rem 0.6rem;
+        font-size: 0.7rem;
+        margin-right: 0.3rem;
+    }
+}
