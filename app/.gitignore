@@ -1,0 +1,91 @@
+# ============================================================================
+# .gitignore - Archivos que NO deben ser commiteados a GitHub
+# ============================================================================
+
+# 🔒 ENVIRONMENT & SECRETS
+.env
+.env.local
+.env.*.local
+.env.production.local
+.env.development.local
+
+# 📦 NODE MODULES
+node_modules/
+npm-debug.log
+npm-error.log
+yarn-debug.log
+yarn-error.log
+pnpm-debug.log
+
+# 🗄️ DATABASE
+dermatologia.db
+dermatologia.db-journal
+*.db
+*.sqlite
+*.sqlite3
+
+# 🔑 KEYS & CERTIFICATES
+*.pem
+*.key
+*.crt
+*.pfx
+id_rsa
+id_rsa.pub
+.ssh/
+
+# 📁 OS FILES
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+desktop.ini
+
+# 🛠️ IDE & EDITOR
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.project
+.classpath
+.c9/
+*.VC.db
+*.VC.VC.opendb
+.vscode-test/
+
+# 📊 BUILD & DIST
+dist/
+build/
+*.tar.gz
+*.zip
+
+# 🧪 TEST & COVERAGE
+coverage/
+.nyc_output/
+test-results/
+
+# 📝 LOGS
+logs/
+*.log
+log.txt
+
+# 🔍 CACHE
+.cache/
+.eslintcache
+.next/
+.cache/
+
+# 📦 PACKAGE MANAGER
+package-lock.json (optional - pero recomendado incluir)
+pnpm-lock.yaml
+
+# 🌐 ENVIRONMENT SPECIFIC
+.env.test
+.env.staging
+
+# ⚙️ MISC
+.turbo
+.turbo/

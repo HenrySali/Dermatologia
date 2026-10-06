@@ -7,6 +7,11 @@ import bodyParser from 'body-parser';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import fs from 'fs';
+import helmet from 'helmet';
+import rateLimit from 'express-rate-limit';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -15,10 +20,75 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 const JWT_SECRET = process.env.JWT_SECRET || 'tu_clave_secreta_super_segura_cambiar_en_produccion';
 
-// Middleware
-app.use(cors());
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+// ============================================
+// 🔒 SECURITY MIDDLEWARE
+// ============================================
+
+// Helmet - Seguridad HTTP headers
+app.use(helmet({
+  contentSecurityPolicy: {
+    directives: {
+      defaultSrc: ["'self'"],
+      scriptSrc: ["'self'", "'unsafe-inline'", "https://www.googletagmanager.com", "https://www.google-analytics.com"],
+      styleSrc: ["'self'", "'unsafe-inline'"],
+      imgSrc: ["'self'", "data:", "https:"],
+      connectSrc: ["'self'", "https://www.google-analytics.com", "https://www.googletagmanager.com"],
+      frameSrc: ["'none'"],
+      objectSrc: ["'none'"],
+      upgradeInsecureRequests: []
+    }
+  },
+  hsts: { maxAge: 31536000, includeSubDomains: true, preload: true },
+  frameguard: { action: 'deny' },
+  noSniff: true,
+  xssFilter: true,
+  referrerPolicy: { policy: 'strict-origin-when-cross-origin' }
+}));
+
+// Rate Limiting - Proteger contra ataques de fuerza bruta
+const loginLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutos
+  max: 5, // máx 5 intentos
+  message: 'Demasiados intentos de login. Intenta de nuevo en 15 minutos.',
+  standardHeaders: true,
+  legacyHeaders: false,
+});
+
+const apiLimiter = rateLimit({
+  windowMs: 1 * 60 * 1000, // 1 minuto
+  max: 30, // máx 30 requests por minuto
+  message: 'Demasiadas solicitudes. Intenta de nuevo en un minuto.',
+  standardHeaders: true,
+  legacyHeaders: false,
+  skip: (req) => req.method === 'GET' // No limitar GETs
+});
+
+// CORS - Control de acceso entre dominios
+const corsOptions = {
+  origin: process.env.CORS_ORIGIN || '*',
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  maxAge: 86400
+};
+
+app.use(cors(corsOptions));
+
+// Body Parser - Limitar tamaño de payload
+app.use(bodyParser.json({ limit: '10kb' }));
+app.use(bodyParser.urlencoded({ limit: '10kb', extended: true }));
+
+// Security Headers
+app.use((req, res, next) => {
+  res.setHeader('X-Frame-Options', 'DENY');
+  res.setHeader('X-Content-Type-Options', 'nosniff');
+  res.setHeader('X-XSS-Protection', '1; mode=block');
+  res.setHeader('Strict-Transport-Security', 'max-age=31536000; includeSubDomains; preload');
+  res.setHeader('Content-Security-Policy', "default-src 'self'");
+  next();
+});
+
+// Serve static files
 app.use(express.static(path.join(__dirname, '../')));
 
 // Base de datos SQLite
@@ -98,7 +168,7 @@ function inicializarBD() {
 // ==========================================
 
 // Login
-app.post('/api/auth/login', (req, res) => {
+app.post('/api/auth/login', loginLimiter, (req, res) => {
   const { email, password } = req.body;
 
   if (!email || !password) {
@@ -155,7 +225,7 @@ app.get('/api/pacientes', verificarToken, (req, res) => {
 });
 
 // Crear paciente
-app.post('/api/pacientes', (req, res) => {
+app.post('/api/pacientes', apiLimiter, (req, res) => {
   const { nombre, email, telefono, edad, sexo, tipo_piel, notas } = req.body;
 
   if (!nombre || !email || !telefono) {
@@ -238,7 +308,7 @@ app.get('/api/turnos', verificarToken, (req, res) => {
 });
 
 // Crear turno
-app.post('/api/turnos', (req, res) => {
+app.post('/api/turnos', apiLimiter, (req, res) => {
   const { paciente_id, fecha, hora, motivo, notas } = req.body;
 
   if (!paciente_id || !fecha || !hora) {

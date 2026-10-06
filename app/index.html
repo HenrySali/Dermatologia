@@ -1,11 +1,93 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+    <!-- CHARACTER ENCODING & VIEWPORT -->
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dermatología Profesional - Gestión Integrada</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    
+    <!-- PRIMARY METADATA -->
+    <title>Dra. Stefany Salinas - Dermatología Profesional en Buenos Aires</title>
+    <meta name="description" content="Dermatología especializada con Dra. Stefany Salinas. Residente UBA, Médica Clínica Corpas. Tratamientos para acné, psoriasis, dermatitis, vitiligo y más. Sistema de citas online 24/7.">
+    <meta name="keywords" content="dermatología, dermatólogo, acné, psoriasis, dermatitis, vitiligo, tratamiento de piel, UBA, Buenos Aires, Clínica Corpas">
+    <meta name="author" content="Dra. Stefany Salinas">
+    <meta name="language" content="es">
+    <meta name="revisit-after" content="7">
+    
+    <!-- OPEN GRAPH (Social Sharing) -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Dra. Stefany Salinas - Dermatología Profesional">
+    <meta property="og:description" content="Especialista en dermatología con formación UBA. Consultas y citas disponibles. Tratamientos profesionales para enfermedades de la piel.">
+    <meta property="og:url" content="https://dermatologia-stefany.com">
+    <meta property="og:image" content="https://dermatologia-stefany.com/og-image.jpg">
+    <meta property="og:locale" content="es_AR">
+    
+    <!-- TWITTER CARD -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Dra. Stefany Salinas - Dermatología">
+    <meta name="twitter:description" content="Dermatóloga especializada. Residente UBA, Médica Clínica Corpas. Sistema de citas online.">
+    <meta name="twitter:image" content="https://dermatologia-stefany.com/og-image.jpg">
+    
+    <!-- CANONICAL URL -->
+    <link rel="canonical" href="https://dermatologia-stefany.com">
+    
+    <!-- FAVICON -->
+    <link rel="icon" type="image/png" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='75' font-size='75' fill='%23003d7a'>🏥</text></svg>">
+    <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='75' font-size='75' fill='%23003d7a'>🏥</text></svg>">
+    
+    <!-- STYLESHEETS -->
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="css/app.css">
+    <link rel="stylesheet" href="css/legal.css">
+    
+    <!-- STRUCTURED DATA (SCHEMA.JSON) -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "LocalBusiness",
+        "@id": "https://dermatologia-stefany.com",
+        "name": "Dra. Stefany Salinas - Dermatología",
+        "description": "Clínica de dermatología especializada",
+        "image": "https://dermatologia-stefany.com/og-image.jpg",
+        "url": "https://dermatologia-stefany.com",
+        "telephone": "+54-11-XXXX-XXXX",
+        "email": "contacto@dermatologia-stefany.com",
+        "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Buenos Aires",
+            "addressLocality": "Buenos Aires",
+            "postalCode": "",
+            "addressCountry": "AR"
+        },
+        "priceRange": "$$",
+        "areaServed": ["AR", "CO"],
+        "openingHoursSpecification": [
+            {
+                "@type": "OpeningHoursSpecification",
+                "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+                "opens": "09:00",
+                "closes": "17:00"
+            }
+        ]
+    }
+    </script>
+    
+    <!-- GOOGLE ANALYTICS 4 -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-XXXXXXXXXX', {
+            'page_path': window.location.pathname,
+            'anonymize_ip': true
+        });
+    </script>
+    
+    <!-- PRECONNECT FOR PERFORMANCE -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="dns-prefetch" href="https://www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
 </head>
 <body>
     <!-- NAVEGACIÓN -->
@@ -537,12 +619,49 @@
     <!-- FOOTER -->
     <footer class="footer">
         <div class="container">
-            <p>&copy; 2024 Dra. Stefany Salinas - Dermatología Profesional. Residente UBA | Médica Clínica Corpas.</p>
-            <p>Disclaimer: La información en este sitio es educativa y no reemplaza la consulta médica profesional.</p>
+            <div class="footer-content">
+                <div class="footer-section">
+                    <p>&copy; 2024 Dra. Stefany Salinas - Dermatología Profesional</p>
+                    <p class="footer-credentials">Residente UBA | Médica Clínica Corpas Bogotá</p>
+                </div>
+                <div class="footer-section">
+                    <p class="footer-legal-title">Información Legal</p>
+                    <ul class="footer-links">
+                        <li><a href="politica-privacidad.html" target="_blank">Política de Privacidad</a></li>
+                        <li><a href="terminos-servicio.html" target="_blank">Términos de Servicio</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <p class="footer-disclaimer">⚕️ Disclaimer: La información en este sitio es educativa y no reemplaza la consulta médica profesional.</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>Alojado con HTTPS seguro | Datos protegidos | Certificado SSL</p>
+            </div>
         </div>
     </footer>
 
     <script src="/js/script.js"></script>
     <script src="js/app.js"></script>
+    
+    <!-- SEO ENHANCEMENT SCRIPT -->
+    <script>
+        // Track page visits for analytics
+        if (window.gtag) {
+            gtag('event', 'page_view');
+        }
+        
+        // Set up breadcrumb tracking
+        document.querySelectorAll('[onclick*="cambiarSeccion"]').forEach(link => {
+            link.addEventListener('click', function(e) {
+                const section = this.getAttribute('onclick').match(/'([^']*)/)[1];
+                if (window.gtag) {
+                    gtag('event', 'navigate_to_section', {
+                        'section': section
+                    });
+                }
+            });
+        });
+    </script>
 </body>
 </html>
