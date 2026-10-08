@@ -1,82 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <!-- Gradientes -->
-    <linearGradient id="skinGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#FF9A76;stop-opacity:1" />
-      <stop offset="100%" style="stop-color:#E6887F;stop-opacity:1" />
+    <linearGradient id="brandGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0080ff"/>
+      <stop offset="100%" stop-color="#004999"/>
     </linearGradient>
-    
-    <linearGradient id="blueGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#0066CC;stop-opacity:1" />
-      <stop offset="100%" style="stop-color:#0052A3;stop-opacity:1" />
+    <linearGradient id="accentGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2ecc71"/>
+      <stop offset="100%" stop-color="#27ae60"/>
     </linearGradient>
-    
-    <filter id="shadow">
-      <feDropShadow dx="0" dy="3" stdDeviation="4" flood-opacity="0.3"/>
-    </filter>
   </defs>
 
-  <!-- CÍRCULO BLANCO DE FONDO -->
-  <circle cx="100" cy="100" r="95" fill="white" filter="url(#shadow)"/>
-  
-  <!-- CÍRCULO AZUL OSCURO COMO BORDE/MARCO -->
-  <circle cx="100" cy="100" r="92" fill="none" stroke="url(#blueGradient)" stroke-width="3"/>
+  <!-- Círculo base con degradado corporativo -->
+  <circle cx="100" cy="100" r="94" fill="url(#brandGradient)"/>
 
-  <!-- MANO DERMATOLÓGICA (símbolo universal de dermatología) -->
-  <g transform="translate(100, 105)">
-    <!-- Palma de la mano (piel realista) -->
-    <ellipse cx="0" cy="0" rx="28" ry="32" fill="url(#skinGradient)"/>
-    
-    <!-- Líneas de la mano (detalle realista) -->
-    <path d="M -15 -10 Q 0 -5 15 -8" fill="none" stroke="#D67A70" stroke-width="1.5" opacity="0.6"/>
-    <path d="M -18 0 Q 0 5 18 0" fill="none" stroke="#D67A70" stroke-width="1.5" opacity="0.6"/>
-    <path d="M -15 10 Q 0 12 15 10" fill="none" stroke="#D67A70" stroke-width="1.5" opacity="0.6"/>
-    
-    <!-- Textura de piel (puntos sutiles) -->
-    <circle cx="-8" cy="-15" r="1.5" fill="#D67A70" opacity="0.4"/>
-    <circle cx="8" cy="-18" r="1.2" fill="#D67A70" opacity="0.4"/>
-    <circle cx="-10" cy="5" r="1.3" fill="#D67A70" opacity="0.4"/>
-    <circle cx="12" cy="8" r="1.4" fill="#D67A70" opacity="0.4"/>
-    <circle cx="0" cy="-8" r="1.2" fill="#D67A70" opacity="0.4"/>
-  </g>
+  <!-- Anillo interior sutil -->
+  <circle cx="100" cy="100" r="94" fill="none" stroke="#ffffff" stroke-width="2" opacity="0.25"/>
 
-  <!-- SÍMBOLO DERMATOLÓGICO: CRUZ MÉDICA EN LA PALMA -->
-  <g transform="translate(100, 105)">
-    <!-- Cruz médica (verde/azul) -->
-    <g transform="scale(0.9)">
-      <!-- Barra vertical -->
-      <rect x="-4" y="-10" width="8" height="20" fill="url(#blueGradient)" rx="2"/>
-      <!-- Barra horizontal -->
-      <rect x="-10" y="-4" width="20" height="8" fill="url(#blueGradient)" rx="2"/>
-    </g>
-  </g>
+  <!-- Gota (piel sana / hidratación) en blanco, símbolo central limpio -->
+  <path d="M100 48
+           C100 48 62 92 62 124
+           a38 38 0 0 0 76 0
+           C138 92 100 48 100 48 Z"
+        fill="#ffffff"/>
 
-  <!-- LUPA/AUMENTO (inspección de la piel) -->
-  <g transform="translate(135, 60)">
-    <!-- Mango de lupa -->
-    <rect x="0" y="0" width="5" height="18" fill="url(#blueGradient)" rx="2.5"/>
-    
-    <!-- Cristal de lupa -->
-    <circle cx="-12" cy="-8" r="15" fill="none" stroke="url(#blueGradient)" stroke-width="3"/>
-    <circle cx="-12" cy="-8" r="12" fill="#E8F4F8" opacity="0.4"/>
-    
-    <!-- Brillo en la lupa -->
-    <circle cx="-18" cy="-14" r="4" fill="white" opacity="0.8"/>
-  </g>
+  <!-- Brillo de la gota -->
+  <path d="M86 112
+           a16 16 0 0 0 -6 16"
+        fill="none" stroke="#0080ff" stroke-width="4" stroke-linecap="round" opacity="0.35"/>
 
-  <!-- ELEMENTO DECORATIVO: MOLÉCULA/CÉLULA DE PIEL -->
-  <g transform="translate(65, 65)">
-    <!-- Átomos (puntos) -->
-    <circle cx="0" cy="0" r="4" fill="url(#blueGradient)"/>
-    <circle cx="12" cy="8" r="3" fill="#0066CC" opacity="0.8"/>
-    <circle cx="-8" cy="12" r="3" fill="#0066CC" opacity="0.8"/>
-    
-    <!-- Enlaces (líneas) -->
-    <line x1="0" y1="0" x2="12" y2="8" stroke="url(#blueGradient)" stroke-width="2" opacity="0.7"/>
-    <line x1="0" y1="0" x2="-8" y2="12" stroke="url(#blueGradient)" stroke-width="2" opacity="0.7"/>
-  </g>
-
-  <!-- TEXTO: "D" para Dermatología (muy sutil) -->
-  <text x="100" y="185" font-size="16" font-weight="bold" fill="url(#blueGradient)" text-anchor="middle" opacity="0.3" font-family="Arial">D</text>
+  <!-- Acento verde: media luna inferior que sugiere cuidado/renovación -->
+  <path d="M100 162
+           a38 38 0 0 0 36 -26
+           a38 38 0 0 1 -72 0
+           a38 38 0 0 0 36 26 Z"
+        fill="url(#accentGradient)" opacity="0.9"/>
 </svg>

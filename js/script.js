@@ -58,7 +58,7 @@ ${mensaje}
     `.trim();
 
     // Crear mailto link
-    const mailtoLink = `mailto:contacto@dermatologia.com?subject=${encodeURIComponent(asunto)}&body=${encodeURIComponent(cuerpoEmail)}`;
+    const mailtoLink = `mailto:Dermatologiayeatetica19@gmail.com?subject=${encodeURIComponent(asunto)}&body=${encodeURIComponent(cuerpoEmail)}`;
 
     // Abrir cliente de email
     window.location.href = mailtoLink;
