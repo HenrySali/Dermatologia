@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="400" height="500" viewBox="0 0 400 500" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#F5E6D3;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#EDD5C3;stop-opacity:1" />
+    </linearGradient>
+    
+    <radialGradient id="skinGradient" cx="50%" cy="40%">
+      <stop offset="0%" style="stop-color:#F4C4A0;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#D4956F;stop-opacity:1" />
+    </radialGradient>
+  </defs>
+
+  <!-- Fondo -->
+  <rect width="400" height="500" fill="url(#bgGradient)"/>
+
+  <!-- Cabeza (círculo) -->
+  <circle cx="200" cy="120" r="60" fill="url(#skinGradient)"/>
+
+  <!-- Cabello -->
+  <path d="M 140 120 Q 140 60 200 50 Q 260 60 260 120" fill="#8B6F47"/>
+  
+  <!-- Highlights cabello -->
+  <path d="M 160 70 Q 165 60 175 65" fill="#A0845A" opacity="0.6"/>
+  <path d="M 220 65 Q 230 58 240 70" fill="#A0845A" opacity="0.6"/>
+
+  <!-- Ojos -->
+  <circle cx="175" cy="110" r="8" fill="#4A3728"/>
+  <circle cx="225" cy="110" r="8" fill="#4A3728"/>
+  <circle cx="177" cy="108" r="3" fill="white" opacity="0.8"/>
+  <circle cx="227" cy="108" r="3" fill="white" opacity="0.8"/>
+
+  <!-- Cejas -->
+  <path d="M 160 95 Q 175 90 190 95" fill="#6B5438" stroke="#6B5438" stroke-width="2" stroke-linecap="round"/>
+  <path d="M 210 95 Q 225 90 240 95" fill="#6B5438" stroke="#6B5438" stroke-width="2" stroke-linecap="round"/>
+
+  <!-- Nariz -->
+  <path d="M 200 110 L 200 135" stroke="#C49060" stroke-width="2" fill="none"/>
+
+  <!-- Boca (sonrisa) -->
+  <path d="M 180 145 Q 200 155 220 145" fill="none" stroke="#D97F7F" stroke-width="2.5" stroke-linecap="round"/>
+
+  <!-- Cuello -->
+  <rect x="185" y="170" width="30" height="20" fill="url(#skinGradient)"/>
+
+  <!-- Blusa blanca profesional -->
+  <path d="M 140 190 L 135 500 L 265 500 L 260 190 Q 200 185 140 190 Z" fill="white"/>
+  
+  <!-- Solapa izquierda -->
+  <path d="M 170 190 L 160 250 L 200 240 Z" fill="#F5F5F5" opacity="0.7"/>
+  
+  <!-- Solapa derecha -->
+  <path d="M 230 190 L 240 250 L 200 240 Z" fill="#F5F5F5" opacity="0.7"/>
+
+  <!-- Botones de blusa -->
+  <circle cx="200" cy="220" r="3" fill="#CCCCCC"/>
+  <circle cx="200" cy="260" r="3" fill="#CCCCCC"/>
+  <circle cx="200" cy="300" r="3" fill="#CCCCCC"/>
+
+  <!-- Sombra profesional bajo la foto -->
+  <ellipse cx="200" cy="495" rx="150" ry="15" fill="#000000" opacity="0.1"/>
+
+  <!-- Texto: Nombre -->
+  <text x="200" y="380" font-size="28" font-weight="bold" fill="#0066CC" text-anchor="middle" font-family="Arial">
+    Dra. Stefany Salinas
+  </text>
+
+  <!-- Texto: Especialidad -->
+  <text x="200" y="415" font-size="16" fill="#666666" text-anchor="middle" font-family="Arial">
+    Dermatóloga Profesional
+  </text>
+
+  <!-- Texto: Credenciales -->
+  <text x="200" y="445" font-size="12" fill="#999999" text-anchor="middle" font-family="Arial">
+    Residente UBA • Médica Clínica Corpas
+  </text>
+</svg>
