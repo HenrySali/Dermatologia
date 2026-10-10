@@ -116,7 +116,7 @@
             <div class="blog-grid">
                 <article class="blog-card">
                     <a href="app/blog/acne.html" class="blog-card-image">
-                        <img src="app/blog/images/acne-tipos.jpg" alt="Acné: causas, tipos y tratamientos" loading="lazy">
+                        <img src="app/blog/images/acne-ilustracion.svg" alt="Acné: causas, tipos y tratamientos" loading="lazy">
                     </a>
                     <div class="blog-header">
                         <span class="blog-category">Inflamación</span>
@@ -129,7 +129,7 @@
 
                 <article class="blog-card">
                     <a href="app/blog/psoriasis.html" class="blog-card-image">
-                        <img src="app/blog/images/psoriasis-piel.jpg" alt="Psoriasis: síntomas y tratamientos" loading="lazy">
+                        <img src="app/blog/images/psoriasis-ilustracion.svg" alt="Psoriasis: síntomas y tratamientos" loading="lazy">
                     </a>
                     <div class="blog-header">
                         <span class="blog-category">Inflamación</span>
@@ -168,7 +168,7 @@
 
                 <article class="blog-card">
                     <a href="app/blog/hongos.html" class="blog-card-image">
-                        <img src="app/blog/images/hongos-micosis.jpg" alt="Infecciones fúngicas: prevención y tratamiento" loading="lazy">
+                        <img src="app/blog/images/hongos-ilustracion.svg" alt="Infecciones fúngicas: prevención y tratamiento" loading="lazy">
                     </a>
                     <div class="blog-header">
                         <span class="blog-category">Infecciones</span>
@@ -203,27 +203,37 @@
             
             <div class="contact-content">
                 <form class="contact-form" id="contactForm">
-                    <div class="form-group">
-                        <label for="nombre">Nombre completo</label>
-                        <input type="text" id="nombre" name="nombre" required>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="nombre">Nombre completo</label>
+                            <input type="text" id="nombre" name="nombre" placeholder="Tu nombre" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Correo electrónico</label>
+                            <input type="email" id="email" name="email" placeholder="tu@correo.com" required>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label for="email">Correo electrónico</label>
-                        <input type="email" id="email" name="email" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="telefono">Teléfono</label>
-                        <input type="tel" id="telefono" name="telefono">
-                    </div>
-                    <div class="form-group">
-                        <label for="asunto">Asunto</label>
-                        <input type="text" id="asunto" name="asunto" required>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="telefono">Teléfono</label>
+                            <input type="tel" id="telefono" name="telefono" placeholder="+57 300 000 0000">
+                        </div>
+                        <div class="form-group">
+                            <label for="asunto">Asunto</label>
+                            <input type="text" id="asunto" name="asunto" placeholder="Motivo de la consulta" required>
+                        </div>
                     </div>
                     <div class="form-group">
                         <label for="mensaje">Mensaje</label>
-                        <textarea id="mensaje" name="mensaje" rows="5" required></textarea>
+                        <textarea id="mensaje" name="mensaje" rows="4" placeholder="Cuéntanos cómo podemos ayudarte" required></textarea>
                     </div>
-                    <button type="submit" class="submit-button">Enviar Mensaje</button>
+                    <div class="form-actions">
+                        <button type="submit" class="submit-button">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M2.5 21.5l1.4-5A9.5 9.5 0 1 1 7 20.1l-4.5 1.4zm5-3l.3.2a7.6 7.6 0 1 0-2.6-2.6l.2.3-.8 2.9 2.9-.8zm9.4-4.3c-.2-.1-1.4-.7-1.6-.8-.2-.1-.4-.1-.5.1-.1.2-.6.8-.7.9-.1.2-.3.2-.5.1-.2-.1-1-.4-1.9-1.2-.7-.6-1.2-1.4-1.3-1.6-.1-.2 0-.3.1-.4.1-.1.2-.3.3-.4.1-.1.1-.2.2-.4 0-.2 0-.3-.1-.4 0-.1-.5-1.2-.7-1.7-.2-.4-.4-.4-.5-.4h-.5c-.2 0-.4.1-.6.3-.2.2-.8.8-.8 2s.8 2.3.9 2.4c.1.2 1.6 2.5 3.9 3.5 1.5.6 2 .7 2.8.6.5-.1 1.4-.6 1.6-1.1.2-.5.2-1 .1-1.1-.1-.1-.2-.1-.4-.3z"/></svg>
+                            Enviar mensaje
+                        </button>
+                        <span class="form-hint">Te respondemos en menos de 24 h</span>
+                    </div>
                 </form>
 
                 <div class="contact-info">
