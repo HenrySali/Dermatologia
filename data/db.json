@@ -1,0 +1,7 @@
+{
+  "users": [
+    { "id": 1, "name": "Stefany", "password": "Derma2026", "role": "admin" },
+    { "id": 2, "name": "Henry", "password": "Derma2026!", "role": "superadmin" }
+  ],
+  "turnos": []
+}

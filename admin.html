@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="robots" content="noindex,nofollow">
+<title>Panel de Turnos — Dra. Stefany Salinas</title>
+<style>
+:root{
+  --primary:#2f4a4d;
+  --primary-dark:#233a3c;
+  --primary-light:#3a575a;
+  --gold:#c7a062;
+  --gold-dark:#b08d4f;
+  --cream:#faf7f2;
+  --page:#f4efe9;
+  --text:#2b2b28;
+  --text-light:#6f6a62;
+  --border:#e7ddcb;
+  --shadow:0 4px 16px rgba(47,74,77,.08);
+  --shadow-hover:0 8px 28px rgba(47,74,77,.15);
+  --danger:#c0463a;
+  --success:#4b8b5c;
+  --warning:#c7903a;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Jost','Segoe UI',Tahoma,sans-serif;font-weight:300;color:var(--text);background:var(--page);min-height:100vh}
+h1,h2,h3,h4{font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;letter-spacing:.3px}
+.hidden{display:none!important}
+
+/* LOGIN SCREEN */
+.login-wrap{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px;background:linear-gradient(135deg,var(--cream) 0%,var(--page) 100%)}
+.login-box{width:100%;max-width:400px;background:#fff;padding:2.5rem 2rem;border-radius:14px;box-shadow:var(--shadow);border:1px solid var(--border)}
+.login-box h1{text-align:center;color:var(--primary);font-size:2rem;margin-bottom:.3rem}
+.login-box .subtitle{text-align:center;color:var(--text-light);font-size:.9rem;margin-bottom:2rem}
+.login-box label{display:block;font-size:.8rem;text-transform:uppercase;letter-spacing:.4px;font-weight:500;color:var(--text-light);margin-bottom:.3rem;margin-top:1rem}
+.login-box input{width:100%;height:44px;padding:0 .9rem;border:1px solid var(--border);border-radius:8px;background:var(--cream);font-size:.95rem;font-family:inherit;color:var(--text);transition:all .2s}
+.login-box input:focus{outline:none;background:#fff;border-color:var(--gold);box-shadow:0 0 0 3px rgba(199,160,98,.18)}
+.btn{background:var(--primary);color:#fff;border:none;height:46px;padding:0 1.75rem;border-radius:8px;font-size:.95rem;font-weight:500;letter-spacing:.3px;cursor:pointer;transition:all .25s;font-family:inherit;display:inline-flex;align-items:center;justify-content:center;gap:.5rem}
+.btn:hover{background:var(--primary-light);transform:translateY(-1px);box-shadow:var(--shadow-hover)}
+.btn:disabled{opacity:.5;cursor:not-allowed}
+.btn-full{width:100%;margin-top:1.5rem}
+.btn-outline{background:transparent;color:var(--primary);border:1.5px solid var(--primary)}
+.btn-outline:hover{background:var(--primary);color:#fff}
+.btn-gold{background:var(--gold);color:#fff}
+.btn-gold:hover{background:var(--gold-dark)}
+.btn-danger{background:transparent;color:var(--danger);border:1px solid var(--danger);height:34px;padding:0 .8rem;font-size:.82rem;border-radius:6px}
+.btn-danger:hover{background:var(--danger);color:#fff;box-shadow:none;transform:none}
+.btn-small{height:34px;padding:0 .9rem;font-size:.82rem;border-radius:6px}
+.error-msg{background:rgba(192,70,58,.1);color:var(--danger);padding:.75rem;border-radius:8px;font-size:.85rem;text-align:center;margin-bottom:1rem;border:1px solid rgba(192,70,58,.3)}
+.help-text{font-size:.78rem;color:var(--text-light);margin-top:.4rem;line-height:1.4}
+.help-text a{color:var(--gold-dark)}
+
+/* TOKEN SCREEN OVERLAY */
+#token-screen{position:fixed;inset:0;background:rgba(35,58,60,.6);display:flex;align-items:center;justify-content:center;padding:20px;z-index:200}
+
+/* APP SCREEN */
+.topbar{background:var(--primary);color:#fff;padding:1rem 2rem;display:flex;justify-content:space-between;align-items:center;border-bottom:3px solid var(--gold)}
+.topbar h2{color:#fff;font-size:1.3rem}
+.topbar .user{font-size:.82rem;opacity:.85;margin-top:2px}
+.topbar-right{display:flex;gap:.5rem;align-items:center}
+.topbar-right .btn{height:36px;padding:0 1rem;font-size:.85rem}
+.topbar-right .btn-outline{background:rgba(255,255,255,.1);color:#fff;border-color:rgba(255,255,255,.3)}
+.topbar-right .btn-outline:hover{background:#fff;color:var(--primary)}
+
+.container{max-width:1200px;margin:0 auto;padding:2rem}
+.panel{background:#fff;border-radius:14px;padding:1.75rem;box-shadow:var(--shadow);border:1px solid var(--border);margin-bottom:1.5rem}
+.panel h3{color:var(--primary);font-size:1.3rem;margin-bottom:1rem}
+
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1rem;margin-bottom:1.5rem}
+.stat{background:#fff;border-radius:12px;padding:1.25rem;box-shadow:var(--shadow);border:1px solid var(--border);text-align:center}
+.stat .num{font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:600;color:var(--primary)}
+.stat .lbl{font-size:.78rem;text-transform:uppercase;letter-spacing:.5px;color:var(--text-light);margin-top:.25rem}
+.stat.pendiente .num{color:var(--warning)}
+.stat.confirmado .num{color:var(--success)}
+.stat.cancelado .num{color:var(--danger)}
+
+.toolbar{display:flex;gap:.75rem;flex-wrap:wrap;align-items:center;margin-bottom:1.25rem}
+.toolbar input,.toolbar select{height:40px;padding:0 .8rem;border:1px solid var(--border);border-radius:8px;background:var(--cream);font-size:.9rem;font-family:inherit;color:var(--text)}
+.toolbar input:focus,.toolbar select:focus{outline:none;background:#fff;border-color:var(--gold)}
+.toolbar input{flex:1;min-width:200px}
+.spacer{flex:1}
+
+/* FORM */
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.form-grid-full{grid-column:1/-1}
+.field label{display:block;font-size:.78rem;text-transform:uppercase;letter-spacing:.4px;color:var(--text-light);margin-bottom:.3rem;font-weight:500}
+.field input,.field select,.field textarea{width:100%;padding:.6rem .8rem;border:1px solid var(--border);border-radius:8px;background:var(--cream);font-size:.9rem;font-family:inherit;color:var(--text);transition:all .2s}
+.field textarea{min-height:80px;resize:vertical;line-height:1.5}
+.field input:focus,.field select:focus,.field textarea:focus{outline:none;background:#fff;border-color:var(--gold);box-shadow:0 0 0 3px rgba(199,160,98,.15)}
+.form-actions{margin-top:1.25rem;display:flex;gap:.75rem;justify-content:flex-end}
+
+/* LIST */
+.turno-list{display:flex;flex-direction:column;gap:.9rem}
+.turno-card{background:var(--cream);border:1px solid var(--border);border-radius:12px;padding:1.1rem 1.25rem;transition:all .2s}
+.turno-card:hover{box-shadow:var(--shadow)}
+.turno-top{display:flex;justify-content:space-between;align-items:flex-start;gap:.75rem;flex-wrap:wrap;margin-bottom:.5rem}
+.turno-top h4{color:var(--primary);font-size:1.15rem}
+.turno-meta{font-size:.82rem;color:var(--text-light);display:flex;gap:1rem;flex-wrap:wrap;margin:.3rem 0}
+.turno-meta span{display:inline-flex;align-items:center;gap:.3rem}
+.turno-notas{font-size:.85rem;color:var(--text);margin:.6rem 0;line-height:1.5;background:#fff;padding:.6rem .8rem;border-radius:6px;border-left:3px solid var(--gold)}
+.turno-actions{display:flex;gap:.5rem;flex-wrap:wrap;margin-top:.75rem}
+
+.badge{display:inline-flex;align-items:center;padding:.3rem .75rem;border-radius:20px;font-size:.72rem;font-weight:600;text-transform:uppercase;letter-spacing:.4px}
+.badge-pendiente{background:rgba(199,144,58,.15);color:var(--warning)}
+.badge-confirmado{background:rgba(75,139,92,.15);color:var(--success)}
+.badge-cancelado{background:rgba(192,70,58,.15);color:var(--danger)}
+.badge-atendido{background:rgba(47,74,77,.1);color:var(--primary)}
+
+.empty{text-align:center;padding:3rem 1rem;color:var(--text-light)}
+.empty .icon{font-size:3rem;margin-bottom:.5rem;opacity:.5}
+
+/* MODAL */
+.modal-bg{position:fixed;inset:0;background:rgba(35,58,60,.5);display:flex;align-items:center;justify-content:center;padding:20px;z-index:150}
+.modal{background:#fff;border-radius:14px;padding:1.75rem;max-width:580px;width:100%;max-height:90vh;overflow-y:auto;box-shadow:var(--shadow-hover)}
+.modal h3{color:var(--primary);margin-bottom:1rem}
+
+/* TOAST */
+.toast{position:fixed;bottom:2rem;right:2rem;background:var(--primary);color:#fff;padding:.9rem 1.25rem;border-radius:8px;box-shadow:var(--shadow-hover);font-size:.9rem;z-index:300;animation:slideIn .3s}
+.toast.success{background:var(--success)}
+.toast.error{background:var(--danger)}
+@keyframes slideIn{from{transform:translateY(100%);opacity:0}to{transform:translateY(0);opacity:1}}
+
+@media(max-width:700px){
+  .container{padding:1rem}
+  .topbar{padding:.75rem 1rem}
+  .form-grid{grid-template-columns:1fr}
+  .toolbar input{min-width:100%}
+}
+</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Jost:wght@300;400;500;600&display=swap">
+</head>
+<body>
+
+<!-- LOGIN -->
+<div id="login-screen" class="login-wrap">
+  <div class="login-box">
+    <h1>Panel de Turnos</h1>
+    <p class="subtitle">Dra. Stefany Salinas</p>
+    <div id="login-error" class="error-msg hidden"></div>
+    <form onsubmit="handleLogin(event);return false">
+      <label>Nombre</label>
+      <input id="login-name" type="text" placeholder="Tu nombre" required autofocus>
+      <label>Clave</label>
+      <input id="login-pass" type="password" placeholder="••••••••" required>
+      <button type="submit" class="btn btn-full">Entrar</button>
+    </form>
+  </div>
+</div>
+
+<!-- TOKEN SCREEN (first-time only) -->
+<div id="token-screen" class="hidden">
+  <div class="login-box">
+    <h1>Configuración inicial</h1>
+    <p class="subtitle">Pegá tu token de GitHub (se guarda solo en este dispositivo)</p>
+    <div id="token-error" class="error-msg hidden">Token inválido o sin permisos</div>
+    <label>Personal Access Token (fine-grained)</label>
+    <input id="token-input" type="password" placeholder="github_pat_...">
+    <p class="help-text">Permiso requerido: <strong>Contents · Read &amp; Write</strong> en el repo <code>Dermatologia</code>. <a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener">Generar token →</a></p>
+    <button class="btn btn-full" onclick="saveToken()">Guardar y continuar</button>
+  </div>
+</div>
+
+<!-- APP -->
+<div id="app-screen" class="hidden">
+  <div class="topbar">
+    <div>
+      <h2>Turnos</h2>
+      <div class="user" id="header-user"></div>
+    </div>
+    <div class="topbar-right">
+      <button class="btn btn-outline" onclick="syncNow()" title="Recargar desde GitHub">🔄 Recargar</button>
+      <button class="btn btn-outline" onclick="logout()">Salir</button>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="stats">
+      <div class="stat"><div class="num" id="stat-total">0</div><div class="lbl">Total</div></div>
+      <div class="stat pendiente"><div class="num" id="stat-pendiente">0</div><div class="lbl">Pendientes</div></div>
+      <div class="stat confirmado"><div class="num" id="stat-confirmado">0</div><div class="lbl">Confirmados</div></div>
+      <div class="stat cancelado"><div class="num" id="stat-cancelado">0</div><div class="lbl">Cancelados</div></div>
+    </div>
+
+    <div class="panel">
+      <h3>Nuevo turno</h3>
+      <form onsubmit="createTurno(event);return false" id="form-nuevo">
+        <div class="form-grid">
+          <div class="field"><label>Nombre</label><input type="text" name="nombre" required></div>
+          <div class="field"><label>Teléfono</label><input type="tel" name="telefono"></div>
+          <div class="field"><label>Email</label><input type="email" name="email"></div>
+          <div class="field"><label>Fecha preferida</label><input type="date" name="fecha"></div>
+          <div class="field form-grid-full"><label>Motivo</label><input type="text" name="motivo" placeholder="Consulta por acné, control, etc."></div>
+          <div class="field form-grid-full"><label>Notas internas</label><textarea name="notas" placeholder="Observaciones privadas"></textarea></div>
+        </div>
+        <div class="form-actions">
+          <button type="reset" class="btn btn-outline btn-small">Limpiar</button>
+          <button type="submit" class="btn btn-gold btn-small">+ Agregar turno</button>
+        </div>
+      </form>
+    </div>
+
+    <div class="panel">
+      <h3>Listado</h3>
+      <div class="toolbar">
+        <input type="text" id="filter-text" placeholder="Buscar por nombre, teléfono, motivo…" oninput="renderList()">
+        <select id="filter-estado" onchange="renderList()">
+          <option value="">Todos los estados</option>
+          <option value="pendiente">Pendientes</option>
+          <option value="confirmado">Confirmados</option>
+          <option value="atendido">Atendidos</option>
+          <option value="cancelado">Cancelados</option>
+        </select>
+      </div>
+      <div id="turno-list" class="turno-list"></div>
+    </div>
+  </div>
+</div>
+
+<!-- EDIT MODAL -->
+<div id="edit-modal" class="modal-bg hidden" onclick="if(event.target===this)closeEdit()">
+  <div class="modal">
+    <h3>Editar turno</h3>
+    <form onsubmit="saveEdit(event);return false" id="form-edit">
+      <input type="hidden" name="id">
+      <div class="form-grid">
+        <div class="field"><label>Nombre</label><input type="text" name="nombre" required></div>
+        <div class="field"><label>Teléfono</label><input type="tel" name="telefono"></div>
+        <div class="field"><label>Email</label><input type="email" name="email"></div>
+        <div class="field"><label>Fecha preferida</label><input type="date" name="fecha"></div>
+        <div class="field"><label>Estado</label>
+          <select name="estado">
+            <option value="pendiente">Pendiente</option>
+            <option value="confirmado">Confirmado</option>
+            <option value="atendido">Atendido</option>
+            <option value="cancelado">Cancelado</option>
+          </select>
+        </div>
+        <div class="field"><label>Motivo</label><input type="text" name="motivo"></div>
+        <div class="field form-grid-full"><label>Notas internas</label><textarea name="notas"></textarea></div>
+      </div>
+      <div class="form-actions">
+        <button type="button" class="btn btn-outline btn-small" onclick="closeEdit()">Cancelar</button>
+        <button type="submit" class="btn btn-small">Guardar cambios</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script>
+const REPO_OWNER = 'HenrySali';
+const REPO_NAME = 'Dermatologia';
+const DATA_PATH = 'data/db.json';
+
+let ghToken = localStorage.getItem('derma_gh_token') || '';
+let currentUser = JSON.parse(localStorage.getItem('derma_user') || 'null');
+let db = { users: [], turnos: [] };
+let dbSha = null;
+
+// ===== GitHub API =====
+async function ghGet(path){
+  const r = await fetch(`https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${path}`, {
+    headers: { Authorization: `token ${ghToken}`, Accept: 'application/vnd.github.v3+json' }
+  });
+  if(r.status === 404) return null;
+  if(!r.ok) throw new Error('GET failed ' + r.status);
+  return r.json();
+}
+async function ghPut(path, contentStr, sha){
+  const body = {
+    message: 'update turnos ' + new Date().toISOString(),
+    content: btoa(unescape(encodeURIComponent(contentStr))),
+    branch: 'main'
+  };
+  if(sha) body.sha = sha;
+  const r = await fetch(`https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${path}`, {
+    method: 'PUT',
+    headers: { Authorization: `token ${ghToken}`, 'Content-Type': 'application/json' },
+    body: JSON.stringify(body)
+  });
+  if(!r.ok){ const e = await r.json(); throw new Error(e.message || 'PUT failed'); }
+  return r.json();
+}
+async function loadDB(){
+  const info = await ghGet(DATA_PATH);
+  if(!info){ db = { users: [], turnos: [] }; dbSha = null; return; }
+  dbSha = info.sha;
+  const txt = decodeURIComponent(escape(atob(info.content.replace(/\s/g,''))));
+  db = JSON.parse(txt);
+  if(!Array.isArray(db.turnos)) db.turnos = [];
+  if(!Array.isArray(db.users)) db.users = [];
+}
+async function saveDB(){
+  const txt = JSON.stringify(db, null, 2);
+  const res = await ghPut(DATA_PATH, txt, dbSha);
+  dbSha = res.content.sha;
+}
+
+// ===== Toast =====
+function toast(msg, type){
+  const t = document.createElement('div');
+  t.className = 'toast ' + (type || '');
+  t.textContent = msg;
+  document.body.appendChild(t);
+  setTimeout(() => t.remove(), 3000);
+}
+
+// ===== Auth =====
+async function handleLogin(e){
+  e.preventDefault();
+  const name = document.getElementById('login-name').value.trim();
+  const pass = document.getElementById('login-pass').value;
+  const err = document.getElementById('login-error');
+  err.classList.add('hidden');
+
+  if(!ghToken){
+    document.getElementById('token-screen').classList.remove('hidden');
+    document.getElementById('token-input').focus();
+    sessionStorage.setItem('pending_login', JSON.stringify({name, pass}));
+    return;
+  }
+
+  try{
+    await loadDB();
+  }catch(ex){
+    err.textContent = 'No se pudo conectar: ' + ex.message;
+    err.classList.remove('hidden');
+    return;
+  }
+
+  const u = db.users.find(x => x.name.toLowerCase() === name.toLowerCase());
+  if(!u || u.password !== pass){
+    err.textContent = 'Nombre o clave incorrectos';
+    err.classList.remove('hidden');
+    return;
+  }
+  currentUser = { id: u.id, name: u.name, role: u.role };
+  localStorage.setItem('derma_user', JSON.stringify(currentUser));
+  showApp();
+}
+
+async function saveToken(){
+  const t = document.getElementById('token-input').value.trim();
+  const err = document.getElementById('token-error');
+  err.classList.add('hidden');
+  if(!t){ err.textContent = 'Pegá el token'; err.classList.remove('hidden'); return; }
+  // test
+  try{
+    const r = await fetch(`https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}`, {
+      headers: { Authorization: `token ${t}` }
+    });
+    if(!r.ok) throw new Error('status ' + r.status);
+  }catch(ex){
+    err.textContent = 'Token inválido o sin permisos: ' + ex.message;
+    err.classList.remove('hidden');
+    return;
+  }
+  ghToken = t;
+  localStorage.setItem('derma_gh_token', t);
+  document.getElementById('token-screen').classList.add('hidden');
+  const pending = sessionStorage.getItem('pending_login');
+  if(pending){
+    sessionStorage.removeItem('pending_login');
+    const {name, pass} = JSON.parse(pending);
+    document.getElementById('login-name').value = name;
+    document.getElementById('login-pass').value = pass;
+    handleLogin(new Event('submit'));
+  }
+}
+
+function logout(){
+  currentUser = null;
+  localStorage.removeItem('derma_user');
+  document.getElementById('app-screen').classList.add('hidden');
+  document.getElementById('login-screen').classList.remove('hidden');
+  document.getElementById('login-name').value = '';
+  document.getElementById('login-pass').value = '';
+}
+
+// ===== App =====
+function showApp(){
+  document.getElementById('login-screen').classList.add('hidden');
+  document.getElementById('app-screen').classList.remove('hidden');
+  const roleLbl = currentUser.role === 'superadmin' ? 'SuperAdmin' : 'Admin';
+  document.getElementById('header-user').textContent = `${currentUser.name} · ${roleLbl}`;
+  renderAll();
+}
+
+async function syncNow(){
+  try{
+    await loadDB();
+    renderAll();
+    toast('Actualizado', 'success');
+  }catch(ex){
+    toast('Error: ' + ex.message, 'error');
+  }
+}
+
+function renderAll(){
+  renderStats();
+  renderList();
+}
+
+function renderStats(){
+  const t = db.turnos || [];
+  document.getElementById('stat-total').textContent = t.length;
+  document.getElementById('stat-pendiente').textContent = t.filter(x => x.estado === 'pendiente').length;
+  document.getElementById('stat-confirmado').textContent = t.filter(x => x.estado === 'confirmado').length;
+  document.getElementById('stat-cancelado').textContent = t.filter(x => x.estado === 'cancelado').length;
+}
+
+function fmtDate(iso){
+  if(!iso) return '—';
+  const d = new Date(iso + 'T00:00:00');
+  if(isNaN(d)) return iso;
+  return d.toLocaleDateString('es-AR', { day: '2-digit', month: 'short', year: 'numeric' });
+}
+function fmtCreated(iso){
+  if(!iso) return '';
+  const d = new Date(iso);
+  if(isNaN(d)) return '';
+  return d.toLocaleString('es-AR', { day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit' });
+}
+
+function renderList(){
+  const list = document.getElementById('turno-list');
+  const q = document.getElementById('filter-text').value.toLowerCase().trim();
+  const estado = document.getElementById('filter-estado').value;
+  let items = [...(db.turnos || [])];
+  if(estado) items = items.filter(t => t.estado === estado);
+  if(q) items = items.filter(t => {
+    const hay = `${t.nombre||''} ${t.telefono||''} ${t.email||''} ${t.motivo||''} ${t.notas||''}`.toLowerCase();
+    return hay.includes(q);
+  });
+  items.sort((a, b) => (b.created_at || '').localeCompare(a.created_at || ''));
+
+  if(items.length === 0){
+    list.innerHTML = `<div class="empty"><div class="icon">📭</div><p>No hay turnos para mostrar.</p></div>`;
+    return;
+  }
+
+  list.innerHTML = items.map(t => `
+    <div class="turno-card">
+      <div class="turno-top">
+        <div>
+          <h4>${escapeHtml(t.nombre)}</h4>
+          <div class="turno-meta">
+            ${t.telefono ? `<span>📱 <a href="https://wa.me/${t.telefono.replace(/\D/g,'')}" target="_blank">${escapeHtml(t.telefono)}</a></span>` : ''}
+            ${t.email ? `<span>✉ <a href="mailto:${escapeHtml(t.email)}">${escapeHtml(t.email)}</a></span>` : ''}
+            <span>📅 ${fmtDate(t.fecha)}</span>
+            ${t.motivo ? `<span>🏷️ ${escapeHtml(t.motivo)}</span>` : ''}
+          </div>
+        </div>
+        <span class="badge badge-${t.estado}">${t.estado}</span>
+      </div>
+      ${t.notas ? `<div class="turno-notas">${escapeHtml(t.notas)}</div>` : ''}
+      <div class="turno-meta" style="font-size:.72rem">Creado: ${fmtCreated(t.created_at)}</div>
+      <div class="turno-actions">
+        ${t.estado !== 'confirmado' ? `<button class="btn btn-small btn-gold" onclick="quickState('${t.id}','confirmado')">Confirmar</button>` : ''}
+        ${t.estado !== 'atendido' ? `<button class="btn btn-small btn-outline" onclick="quickState('${t.id}','atendido')">Marcar atendido</button>` : ''}
+        ${t.estado !== 'cancelado' ? `<button class="btn btn-small btn-outline" onclick="quickState('${t.id}','cancelado')">Cancelar</button>` : ''}
+        <button class="btn btn-small btn-outline" onclick="openEdit('${t.id}')">Editar</button>
+        <button class="btn-danger" onclick="deleteTurno('${t.id}')">Eliminar</button>
+      </div>
+    </div>
+  `).join('');
+}
+
+function escapeHtml(s){
+  if(s == null) return '';
+  return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+
+// ===== CRUD =====
+async function createTurno(e){
+  e.preventDefault();
+  const f = new FormData(e.target);
+  const nuevo = {
+    id: 't' + Date.now().toString(36),
+    nombre: (f.get('nombre') || '').trim(),
+    telefono: (f.get('telefono') || '').trim(),
+    email: (f.get('email') || '').trim(),
+    motivo: (f.get('motivo') || '').trim(),
+    fecha: f.get('fecha') || '',
+    notas: (f.get('notas') || '').trim(),
+    estado: 'pendiente',
+    created_at: new Date().toISOString(),
+    created_by: currentUser.name
+  };
+  if(!nuevo.nombre) return;
+  db.turnos.push(nuevo);
+  try{
+    await saveDB();
+    e.target.reset();
+    renderAll();
+    toast('Turno agregado', 'success');
+  }catch(ex){
+    db.turnos = db.turnos.filter(x => x.id !== nuevo.id);
+    toast('Error al guardar: ' + ex.message, 'error');
+  }
+}
+
+async function quickState(id, estado){
+  const t = db.turnos.find(x => x.id === id);
+  if(!t) return;
+  const prev = t.estado;
+  t.estado = estado;
+  renderAll();
+  try{
+    await saveDB();
+    toast('Estado actualizado', 'success');
+  }catch(ex){
+    t.estado = prev;
+    renderAll();
+    toast('Error: ' + ex.message, 'error');
+  }
+}
+
+async function deleteTurno(id){
+  if(!confirm('¿Eliminar este turno? No se puede deshacer.')) return;
+  const idx = db.turnos.findIndex(x => x.id === id);
+  if(idx === -1) return;
+  const removed = db.turnos.splice(idx, 1)[0];
+  renderAll();
+  try{
+    await saveDB();
+    toast('Turno eliminado', 'success');
+  }catch(ex){
+    db.turnos.splice(idx, 0, removed);
+    renderAll();
+    toast('Error: ' + ex.message, 'error');
+  }
+}
+
+function openEdit(id){
+  const t = db.turnos.find(x => x.id === id);
+  if(!t) return;
+  const f = document.getElementById('form-edit');
+  f.id.value = t.id;
+  f.nombre.value = t.nombre || '';
+  f.telefono.value = t.telefono || '';
+  f.email.value = t.email || '';
+  f.fecha.value = t.fecha || '';
+  f.estado.value = t.estado || 'pendiente';
+  f.motivo.value = t.motivo || '';
+  f.notas.value = t.notas || '';
+  document.getElementById('edit-modal').classList.remove('hidden');
+}
+function closeEdit(){ document.getElementById('edit-modal').classList.add('hidden'); }
+
+async function saveEdit(e){
+  e.preventDefault();
+  const f = new FormData(e.target);
+  const id = f.get('id');
+  const t = db.turnos.find(x => x.id === id);
+  if(!t){ closeEdit(); return; }
+  const snapshot = { ...t };
+  t.nombre = (f.get('nombre') || '').trim();
+  t.telefono = (f.get('telefono') || '').trim();
+  t.email = (f.get('email') || '').trim();
+  t.motivo = (f.get('motivo') || '').trim();
+  t.fecha = f.get('fecha') || '';
+  t.estado = f.get('estado') || 'pendiente';
+  t.notas = (f.get('notas') || '').trim();
+  t.updated_at = new Date().toISOString();
+  t.updated_by = currentUser.name;
+  try{
+    await saveDB();
+    renderAll();
+    closeEdit();
+    toast('Cambios guardados', 'success');
+  }catch(ex){
+    Object.assign(t, snapshot);
+    toast('Error: ' + ex.message, 'error');
+  }
+}
+
+// ===== Init =====
+async function init(){
+  if(currentUser && ghToken){
+    try{
+      await loadDB();
+      const exists = db.users.find(u => u.id === currentUser.id);
+      if(exists){ currentUser = { id: exists.id, name: exists.name, role: exists.role }; showApp(); return; }
+    }catch(ex){ console.error(ex); }
+    logout();
+  }
+}
+init();
+</script>
+</body>
+</html>
