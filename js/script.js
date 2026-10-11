@@ -24,49 +24,39 @@ navLinks.forEach(link => {
 
 const contactForm = document.getElementById('contactForm');
 
+// Número de WhatsApp de la Dra. (formato internacional sin + ni espacios)
+const WHATSAPP_NUMERO = '573176324909';
+
 contactForm.addEventListener('submit', function(e) {
     e.preventDefault();
 
-    // Obtener valores del formulario
-    const nombre = document.getElementById('nombre').value;
-    const email = document.getElementById('email').value;
-    const telefono = document.getElementById('telefono').value;
-    const asunto = document.getElementById('asunto').value;
-    const mensaje = document.getElementById('mensaje').value;
+    const nombre = document.getElementById('nombre').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const telefono = document.getElementById('telefono').value.trim();
+    const asunto = document.getElementById('asunto').value.trim();
+    const mensaje = document.getElementById('mensaje').value.trim();
 
-    // Validación básica
     if (!nombre || !email || !asunto || !mensaje) {
-        alert('Por favor completa todos los campos requeridos.');
+        alert('Por favor completá los campos obligatorios.');
         return;
     }
-
-    // Validar email
     if (!validarEmail(email)) {
-        alert('Por favor ingresa un email válido.');
+        alert('El email no es válido.');
         return;
     }
 
-    // Crear cuerpo del email
-    const cuerpoEmail = `
-Nombre: ${nombre}
-Email: ${email}
-Teléfono: ${telefono}
-Asunto: ${asunto}
+    // Mensaje estructurado para que la Dra. pueda copiarlo tal cual al panel de turnos
+    const texto =
+        `*Nueva solicitud de turno*\n\n` +
+        `*Nombre:* ${nombre}\n` +
+        `*Email:* ${email}\n` +
+        (telefono ? `*Teléfono:* ${telefono}\n` : '') +
+        `*Motivo:* ${asunto}\n\n` +
+        `${mensaje}`;
 
-Mensaje:
-${mensaje}
-    `.trim();
+    const url = `https://wa.me/${WHATSAPP_NUMERO}?text=${encodeURIComponent(texto)}`;
+    window.open(url, '_blank', 'noopener');
 
-    // Crear mailto link
-    const mailtoLink = `mailto:Dermatologiayeatetica19@gmail.com?subject=${encodeURIComponent(asunto)}&body=${encodeURIComponent(cuerpoEmail)}`;
-
-    // Abrir cliente de email
-    window.location.href = mailtoLink;
-
-    // Mostrar confirmación
-    alert('Se abrirá tu cliente de email para enviar el mensaje. ¡Gracias por contactarnos!');
-
-    // Limpiar formulario
     contactForm.reset();
 });
 
