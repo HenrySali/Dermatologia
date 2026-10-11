@@ -30,9 +30,14 @@ const WHATSAPP_NUMERO = '573176324909';
 // ===== Capa de persistencia en GitHub (modo público) =====
 const CFG = window.DERMA_CONFIG || {};
 
+function getToken() {
+    if (!CFG.token_parts || !CFG.token_parts.length) return '';
+    return CFG.token_parts.join('');
+}
+
 async function ghReadDB() {
-    if (!CFG.token_b64) throw new Error('Sin token configurado');
-    const token = atob(CFG.token_b64);
+    const token = getToken();
+    if (!token) throw new Error('Sin token configurado');
     const url = `https://api.github.com/repos/${CFG.repo_owner}/${CFG.repo_name}/contents/${CFG.data_path}`;
     const r = await fetch(url, { headers: { Authorization: 'token ' + token, Accept: 'application/vnd.github.v3+json' } });
     if (!r.ok) throw new Error('No se pudo leer db.json (' + r.status + ')');
@@ -42,7 +47,7 @@ async function ghReadDB() {
 }
 
 async function ghWriteDB(data, sha) {
-    const token = atob(CFG.token_b64);
+    const token = getToken();
     const url = `https://api.github.com/repos/${CFG.repo_owner}/${CFG.repo_name}/contents/${CFG.data_path}`;
     const body = {
         message: 'nueva solicitud de turno ' + new Date().toISOString(),
@@ -114,7 +119,7 @@ contactForm.addEventListener('submit', async function (e) {
 
     // 1) Intenta grabar en db.json. Si falla, igual sigue el WhatsApp.
     let guardado = false;
-    if (CFG.token_b64) {
+    if (getToken()) {
         try {
             await registrarTurnoEnDB(turno);
             guardado = true;
