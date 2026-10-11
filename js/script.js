@@ -27,7 +27,56 @@ const contactForm = document.getElementById('contactForm');
 // Número de WhatsApp de la Dra. (formato internacional sin + ni espacios)
 const WHATSAPP_NUMERO = '573176324909';
 
-contactForm.addEventListener('submit', function(e) {
+// ===== Capa de persistencia en GitHub (modo público) =====
+const CFG = window.DERMA_CONFIG || {};
+
+async function ghReadDB() {
+    if (!CFG.token_b64) throw new Error('Sin token configurado');
+    const token = atob(CFG.token_b64);
+    const url = `https://api.github.com/repos/${CFG.repo_owner}/${CFG.repo_name}/contents/${CFG.data_path}`;
+    const r = await fetch(url, { headers: { Authorization: 'token ' + token, Accept: 'application/vnd.github.v3+json' } });
+    if (!r.ok) throw new Error('No se pudo leer db.json (' + r.status + ')');
+    const info = await r.json();
+    const txt = decodeURIComponent(escape(atob(info.content.replace(/\s/g, ''))));
+    return { data: JSON.parse(txt), sha: info.sha };
+}
+
+async function ghWriteDB(data, sha) {
+    const token = atob(CFG.token_b64);
+    const url = `https://api.github.com/repos/${CFG.repo_owner}/${CFG.repo_name}/contents/${CFG.data_path}`;
+    const body = {
+        message: 'nueva solicitud de turno ' + new Date().toISOString(),
+        content: btoa(unescape(encodeURIComponent(JSON.stringify(data, null, 2)))),
+        branch: 'main',
+        sha
+    };
+    const r = await fetch(url, {
+        method: 'PUT',
+        headers: { Authorization: 'token ' + token, 'Content-Type': 'application/json' },
+        body: JSON.stringify(body)
+    });
+    if (!r.ok) {
+        const e = await r.json();
+        throw new Error(e.message || 'No se pudo guardar');
+    }
+}
+
+async function registrarTurnoEnDB(turno) {
+    // Reintenta hasta 3 veces si el sha cambió por push concurrente
+    for (let i = 0; i < 3; i++) {
+        const { data, sha } = await ghReadDB();
+        if (!Array.isArray(data.turnos)) data.turnos = [];
+        data.turnos.push(turno);
+        try {
+            await ghWriteDB(data, sha);
+            return;
+        } catch (ex) {
+            if (!/sha|conflict/i.test(ex.message) || i === 2) throw ex;
+        }
+    }
+}
+
+contactForm.addEventListener('submit', async function (e) {
     e.preventDefault();
 
     const nombre = document.getElementById('nombre').value.trim();
@@ -45,19 +94,57 @@ contactForm.addEventListener('submit', function(e) {
         return;
     }
 
-    // Mensaje estructurado para que la Dra. pueda copiarlo tal cual al panel de turnos
+    const submitBtn = contactForm.querySelector('button[type="submit"]');
+    const originalText = submitBtn.innerHTML;
+    submitBtn.disabled = true;
+    submitBtn.innerHTML = 'Enviando...';
+
+    const turno = {
+        id: 't' + Date.now().toString(36),
+        nombre,
+        email,
+        telefono,
+        motivo: asunto,
+        fecha: '',
+        notas: mensaje,
+        estado: 'pendiente',
+        created_at: new Date().toISOString(),
+        created_by: 'web_publico'
+    };
+
+    // 1) Intenta grabar en db.json. Si falla, igual sigue el WhatsApp.
+    let guardado = false;
+    if (CFG.token_b64) {
+        try {
+            await registrarTurnoEnDB(turno);
+            guardado = true;
+        } catch (ex) {
+            console.warn('No se pudo grabar el turno en db.json:', ex.message);
+        }
+    }
+
+    // 2) Abre WhatsApp con el mensaje pre-armado
     const texto =
         `*Nueva solicitud de turno*\n\n` +
         `*Nombre:* ${nombre}\n` +
         `*Email:* ${email}\n` +
         (telefono ? `*Teléfono:* ${telefono}\n` : '') +
         `*Motivo:* ${asunto}\n\n` +
-        `${mensaje}`;
+        `${mensaje}` +
+        (guardado ? '\n\n_(registrado automáticamente en el panel)_' : '');
 
     const url = `https://wa.me/${WHATSAPP_NUMERO}?text=${encodeURIComponent(texto)}`;
     window.open(url, '_blank', 'noopener');
 
+    submitBtn.disabled = false;
+    submitBtn.innerHTML = originalText;
     contactForm.reset();
+
+    if (guardado) {
+        alert('¡Listo! Tu solicitud quedó registrada. Te vamos a contactar por WhatsApp a la brevedad.');
+    } else {
+        alert('Abrimos WhatsApp con tu solicitud. Enviá el mensaje y te respondemos a la brevedad.');
+    }
 });
 
 // Función para validar email
