@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 240" width="400" height="240" role="img" aria-label="Ilustración de acné: dermatoscopio examinando lesiones en la piel">
+  <defs>
+    <linearGradient id="bgAcne" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#faf7f2"/>
+      <stop offset="1" stop-color="#efe7da"/>
+    </linearGradient>
+    <radialGradient id="skinAcne" cx="0.4" cy="0.35" r="0.8">
+      <stop offset="0" stop-color="#fbf0e4"/>
+      <stop offset="1" stop-color="#f3e2cf"/>
+    </radialGradient>
+    <clipPath id="lensAcne"><circle cx="166" cy="112" r="80"/></clipPath>
+  </defs>
+
+  <rect width="400" height="240" fill="url(#bgAcne)"/>
+  <circle cx="356" cy="34" r="74" fill="#c7a062" opacity="0.10"/>
+  <circle cx="40" cy="214" r="56" fill="#2f4a4d" opacity="0.06"/>
+
+  <!-- magnifier handle -->
+  <line x1="221" y1="167" x2="300" y2="216" stroke="#b08d4f" stroke-width="18" stroke-linecap="round"/>
+  <line x1="221" y1="167" x2="300" y2="216" stroke="#c7a062" stroke-width="9" stroke-linecap="round"/>
+
+  <!-- lens -->
+  <circle cx="166" cy="112" r="80" fill="url(#skinAcne)"/>
+  <g clip-path="url(#lensAcne)">
+    <!-- subtle skin pores -->
+    <g fill="#e4c9ac" opacity="0.55">
+      <circle cx="120" cy="150" r="2"/><circle cx="150" cy="165" r="1.6"/>
+      <circle cx="200" cy="150" r="2"/><circle cx="210" cy="95" r="1.6"/>
+      <circle cx="110" cy="100" r="1.6"/><circle cx="185" cy="70" r="2"/>
+    </g>
+    <!-- acne lesions -->
+    <g>
+      <circle cx="150" cy="92" r="7" fill="#d58a6f"/>
+      <circle cx="148" cy="90" r="2.4" fill="#f6ded0"/>
+      <circle cx="193" cy="108" r="6" fill="#cf8368"/>
+      <circle cx="162" cy="138" r="8" fill="#d58a6f"/>
+      <circle cx="160" cy="135" r="2.6" fill="#f6ded0"/>
+      <circle cx="128" cy="124" r="5" fill="#c7a062"/>
+      <circle cx="205" cy="140" r="4.5" fill="#cf8368"/>
+      <circle cx="180" cy="78" r="4.5" fill="#c7a062"/>
+      <circle cx="133" cy="78" r="4" fill="#d58a6f"/>
+    </g>
+    <!-- lens shine -->
+    <path d="M110 70 Q150 48 205 66 Q150 60 118 86 Z" fill="#ffffff" opacity="0.35"/>
+  </g>
+
+  <!-- lens rings -->
+  <circle cx="166" cy="112" r="80" fill="none" stroke="#2f4a4d" stroke-width="6"/>
+  <circle cx="166" cy="112" r="73" fill="none" stroke="#ffffff" stroke-width="2" opacity="0.5"/>
+
+  <!-- accent baseline -->
+  <rect x="258" y="150" width="92" height="4" rx="2" fill="#c7a062" opacity="0.5"/>
+</svg>

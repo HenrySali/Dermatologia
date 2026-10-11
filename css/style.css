@@ -281,7 +281,18 @@ h1, h2, h3, h4,
     font-weight: bold;
 }
 
+.about-image {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 360px;
+    margin: 0 auto;
+}
+
+.about-image img,
 .profile-image {
+    display: block;
     width: 100%;
     max-width: 360px;
     height: auto;
@@ -291,23 +302,10 @@ h1, h2, h3, h4,
     transition: transform 0.3s ease, filter 0.3s ease;
 }
 
-.profile-image:hover {
+.profile-image:hover,
+.about-image img:hover {
     transform: scale(1.03);
     filter: brightness(1.05);
-}
-
-.about-image {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-/* Mantiene el mismo tamaño controlado para la foto de perfil */
-.about-image img {
-    width: 100%;
-    max-width: 360px;
-    height: auto;
-    object-fit: cover;
 }
 
 /* ===========================
