@@ -295,8 +295,10 @@ h1, h2, h3, h4,
     display: block;
     width: 100%;
     max-width: 360px;
+    aspect-ratio: 4 / 5;
     height: auto;
     object-fit: cover;
+    object-position: 70% center;
     border-radius: 12px;
     box-shadow: var(--shadow);
     transition: transform 0.3s ease, filter 0.3s ease;
