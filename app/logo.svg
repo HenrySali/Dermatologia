@@ -1,44 +1,60 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Dra. Stefany Salinas — Dermatología">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 320" role="img" aria-label="Stefany Salinas — Dermatología">
   <defs>
-    <linearGradient id="deepPetroleum" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#355557"/>
+    <style type="text/css"><![CDATA[
+      @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Jost:wght@400;500;600&display=swap');
+      .seal-top {
+        font-family: 'Jost', 'Segoe UI', Tahoma, sans-serif;
+        font-weight: 600;
+        font-size: 20px;
+        letter-spacing: 5px;
+        fill: #faf7f2;
+      }
+      .seal-bot {
+        font-family: 'Jost', 'Segoe UI', Tahoma, sans-serif;
+        font-weight: 600;
+        font-size: 18px;
+        letter-spacing: 6px;
+        fill: #c7a062;
+      }
+      .center-s {
+        font-family: 'Cormorant Garamond', Georgia, serif;
+        font-weight: 600;
+        font-size: 115px;
+        fill: #c7a062;
+      }
+    ]]></style>
+    <radialGradient id="bgGrad" cx="35%" cy="30%">
+      <stop offset="0%" stop-color="#3a575a"/>
       <stop offset="100%" stop-color="#233a3c"/>
-    </linearGradient>
-    <linearGradient id="goldLine" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" stop-color="#b08d4f"/>
-      <stop offset="50%" stop-color="#d7b47a"/>
-      <stop offset="100%" stop-color="#b08d4f"/>
-    </linearGradient>
+    </radialGradient>
+    <!-- Arc paths for curved text -->
+    <path id="topArc" d="M 50 160 A 110 110 0 0 1 270 160" fill="none"/>
+    <path id="botArc" d="M 50 160 A 110 110 0 0 0 270 160" fill="none"/>
   </defs>
 
-  <!-- Base círculo petróleo -->
-  <circle cx="100" cy="100" r="92" fill="url(#deepPetroleum)"/>
+  <!-- Base circle petróleo -->
+  <circle cx="160" cy="160" r="150" fill="url(#bgGrad)"/>
 
   <!-- Anillo dorado exterior -->
-  <circle cx="100" cy="100" r="92" fill="none" stroke="#c7a062" stroke-width="1.5"/>
+  <circle cx="160" cy="160" r="150" fill="none" stroke="#c7a062" stroke-width="2"/>
   <!-- Anillo interior sutil -->
-  <circle cx="100" cy="100" r="78" fill="none" stroke="#c7a062" stroke-width="0.6" opacity="0.55"/>
+  <circle cx="160" cy="160" r="134" fill="none" stroke="#c7a062" stroke-width="0.8" opacity="0.55"/>
 
-  <!-- Monograma "SS" entrelazadas, estilo serif editorial -->
-  <!-- S izquierda -->
-  <path d="M78 70
-           C62 70 58 86 72 92
-           L92 100
-           C106 106 102 122 86 122
-           C76 122 70 118 66 112"
-        fill="none" stroke="#faf7f2" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
-  <!-- S derecha, superpuesta y en dorado -->
-  <path d="M134 78
-           C118 78 114 94 128 100
-           L148 108
-           C162 114 158 130 142 130
-           C132 130 126 126 122 120"
-        fill="none" stroke="#c7a062" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Texto curvado superior -->
+  <text class="seal-top">
+    <textPath href="#topArc" startOffset="50%" text-anchor="middle">STEFANY SALINAS</textPath>
+  </text>
 
-  <!-- Línea dorada decorativa inferior -->
-  <path d="M70 150 L130 150" stroke="url(#goldLine)" stroke-width="1.2" stroke-linecap="round"/>
+  <!-- Texto curvado inferior -->
+  <text class="seal-bot">
+    <textPath href="#botArc" startOffset="50%" text-anchor="middle">DERMATOLOGÍA</textPath>
+  </text>
 
-  <!-- Pequeña rombo dorado al centro de la línea -->
-  <path d="M100 145 L105 150 L100 155 L95 150 Z" fill="#c7a062"/>
+  <!-- Rombos dorados a los costados (3 y 9 en punto) -->
+  <path d="M 44 160 L 50 153 L 56 160 L 50 167 Z" fill="#c7a062"/>
+  <path d="M 264 160 L 270 153 L 276 160 L 270 167 Z" fill="#c7a062"/>
+
+  <!-- Monograma S central -->
+  <text class="center-s" x="160" y="200" text-anchor="middle">S</text>
 </svg>
