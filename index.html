@@ -5,6 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Dermatología profesional - Especializada en tratamiento de enfermedades de la piel">
     <title>Dermatología - Clínica Profesional</title>
+
+    <!-- Preconnect fonts (acelera el load) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Jost:wght@300;400;500;600&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Jost:wght@300;400;500;600&display=swap">
+
+    <!-- Preload foto de perfil (above the fold) -->
+    <link rel="preload" as="image" href="app/blog/images/perfil-stefany.jpeg" fetchpriority="high">
+
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -60,7 +70,7 @@
                     <p>Con experiencia tanto en instituciones académicas de prestigio como en clínica privada de excelencia, me dedico a proporcionar diagnósticos precisos y tratamientos personalizados para cada paciente. Mi formación en UBA garantiza los más altos estándares de calidad en el cuidado dermatológico.</p>
                 </div>
                 <div class="about-image">
-                    <img src="app/blog/images/perfil-stefany.jpeg" alt="Dra. Stefany Salinas" title="Dra. Stefany Salinas - Especialista en Dermatología" class="profile-image">
+                    <img src="app/blog/images/perfil-stefany.jpeg" alt="Dra. Stefany Salinas" title="Dra. Stefany Salinas - Especialista en Dermatología" class="profile-image" width="360" height="450" decoding="async" fetchpriority="high">
                 </div>
             </div>
         </div>
@@ -116,7 +126,7 @@
             <div class="blog-grid">
                 <article class="blog-card">
                     <a href="app/blog/acne.html" class="blog-card-image">
-                        <img src="app/blog/images/acne-tipos.jpg" alt="Acné: causas, tipos y tratamientos" loading="lazy">
+                        <img src="app/blog/images/acne-tipos.jpg" alt="Acné: causas, tipos y tratamientos" loading="lazy" decoding="async" width="400" height="223">
                     </a>
                     <div class="blog-header">
                         <span class="blog-category">Inflamación</span>
@@ -129,7 +139,7 @@
 
                 <article class="blog-card">
                     <a href="app/blog/psoriasis.html" class="blog-card-image">
-                        <img src="app/blog/images/psoriasis-piel.jpg" alt="Psoriasis: síntomas y tratamientos" loading="lazy">
+                        <img src="app/blog/images/psoriasis-piel.jpg" alt="Psoriasis: síntomas y tratamientos" loading="lazy" decoding="async" width="400" height="223">
                     </a>
                     <div class="blog-header">
                         <span class="blog-category">Inflamación</span>
@@ -142,7 +152,7 @@
 
                 <article class="blog-card">
                     <a href="app/blog/dermatitis.html" class="blog-card-image">
-                        <img src="app/blog/images/dermatitis-atopica.jpg" alt="Dermatitis atópica: cuidados e hidratación" loading="lazy">
+                        <img src="app/blog/images/dermatitis-atopica.jpg" alt="Dermatitis atópica: cuidados e hidratación" loading="lazy" decoding="async" width="400" height="223">
                     </a>
                     <div class="blog-header">
                         <span class="blog-category">Alergia</span>
@@ -155,7 +165,7 @@
 
                 <article class="blog-card">
                     <a href="app/blog/vitiligo.html" class="blog-card-image">
-                        <img src="app/blog/images/vitiligo-piel.jpg" alt="Vitiligo: información y tratamientos" loading="lazy">
+                        <img src="app/blog/images/vitiligo-piel.jpg" alt="Vitiligo: información y tratamientos" loading="lazy" decoding="async" width="400" height="223">
                     </a>
                     <div class="blog-header">
                         <span class="blog-category">Pigmentación</span>
@@ -168,7 +178,7 @@
 
                 <article class="blog-card">
                     <a href="app/blog/hongos.html" class="blog-card-image">
-                        <img src="app/blog/images/hongos-micosis.jpg" alt="Infecciones fúngicas: prevención y tratamiento" loading="lazy">
+                        <img src="app/blog/images/hongos-micosis.jpg" alt="Infecciones fúngicas: prevención y tratamiento" loading="lazy" decoding="async" width="400" height="223">
                     </a>
                     <div class="blog-header">
                         <span class="blog-category">Infecciones</span>
@@ -181,7 +191,7 @@
 
                 <article class="blog-card">
                     <a href="app/blog/proteccion-solar.html" class="blog-card-image">
-                        <img src="app/blog/images/proteccion-solar-uv.jpg" alt="Importancia de la protección solar" loading="lazy">
+                        <img src="app/blog/images/proteccion-solar-uv.jpg" alt="Importancia de la protección solar" loading="lazy" decoding="async" width="400" height="223">
                     </a>
                     <div class="blog-header">
                         <span class="blog-category">Prevención</span>
@@ -194,7 +204,7 @@
 
                 <article class="blog-card">
                     <a href="app/blog/implante-capilar.html" class="blog-card-image">
-                        <img src="app/blog/images/implante-capilar.jpg" alt="Implante capilar: técnicas FUE y DHI" loading="lazy">
+                        <img src="app/blog/images/implante-capilar.jpg" alt="Implante capilar: técnicas FUE y DHI" loading="lazy" decoding="async" width="400" height="223">
                     </a>
                     <div class="blog-header">
                         <span class="blog-category">Capilar</span>

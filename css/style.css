@@ -8,7 +8,7 @@
     box-sizing: border-box;
 }
 
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Jost:wght@300;400;500;600&display=swap');
+/* Fuentes ahora se cargan desde el <head> para no bloquear el render del CSS */
 
 :root {
     --primary-color: #2f4a4d;      /* Azul petróleo */
