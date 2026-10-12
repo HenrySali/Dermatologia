@@ -17,7 +17,7 @@ body {
 
 /* NAVIGATION BAR */
 nav {
-    background: #2f4a4d;
+    background: linear-gradient(135deg, #0066CC 0%, #0052A3 100%);
     padding: 0.15rem 0;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     position: sticky;
